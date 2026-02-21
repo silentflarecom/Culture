@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String
+  role      String   @default("USER") // USER or ADMIN
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  extractions    Extraction[]
+  authorizations Authorization[]
+}
+
+model Extraction {
+  id        String   @id @default(cuid())
+  element   String   // e.g. "云龙莛蔓"
+  origin    String   // e.g. "正脊雕花"
+  color     String?  // e.g. "#8B1C1C"
+  imageUrl  String?
+  
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+}
+
+model Authorization {
+  id             String   @id @default(cuid())
+  designName     String   // e.g. "国潮云龙手机壳"
+  origin         String   // e.g. "内乡县衙正脊"
+  managementUnit String   // e.g. "内乡县衙博物馆"
+  status         String   @default("PENDING_REVIEW") // PENDING_REVIEW, APPROVED, REJECTED
+  
+  userId         String
+  user           User     @relation(fields: [userId], references: [id])
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}

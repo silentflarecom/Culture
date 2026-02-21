@@ -1,0 +1,101 @@
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-md);
+    background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.05), transparent 40%),
+        radial-gradient(circle at bottom left, rgba(139, 28, 28, 0.05), transparent 40%);
+}
+
+.authBox {
+    width: 100%;
+    max-width: 420px;
+    padding: var(--spacing-2xl);
+    text-align: center;
+}
+
+.title {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--accent-gold);
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xl);
+    font-size: 0.95rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 0.4rem;
+}
+
+.label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--glass-border);
+    background: rgba(0, 0, 0, 0.2);
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.input:focus {
+    outline: none;
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+}
+
+.submitBtn {
+    margin-top: var(--spacing-md);
+    width: 100%;
+    justify-content: center;
+}
+
+.errorMsg {
+    color: var(--error);
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    background: rgba(239, 68, 68, 0.1);
+    padding: 0.5rem;
+    border-radius: var(--radius-sm);
+}
+
+.successMsg {
+    color: var(--success);
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    background: rgba(16, 185, 129, 0.1);
+    padding: 0.5rem;
+    border-radius: var(--radius-sm);
+}
+
+.linkText {
+    display: block;
+    margin-top: var(--spacing-lg);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.linkText a {
+    color: var(--accent-gold);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
