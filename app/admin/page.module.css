@@ -6,12 +6,13 @@
 
 .header {
     margin-bottom: var(--spacing-2xl);
+    text-align: center;
 }
 
 .title {
     font-size: 2.25rem;
     margin-bottom: var(--spacing-xs);
-    color: var(--accent-gold);
+    color: var(--text-primary);
 }
 
 .subtitle {
@@ -27,7 +28,6 @@
 }
 
 .statCard {
-    padding: var(--spacing-xl);
     text-align: center;
     transition: transform 0.2s ease;
 }
@@ -39,15 +39,17 @@
 
 .statLabel {
     color: var(--text-secondary);
-    font-size: 1rem;
+    font-size: 1.1rem;
     margin-bottom: var(--spacing-sm);
+    font-family: var(--font-serif);
 }
 
 .statValue {
     font-size: 3rem;
     font-weight: 700;
     line-height: 1;
-    color: var(--text-primary);
+    color: var(--accent-red);
+    /* Stronger pop for stats */
 }
 
 .splitLayout {
@@ -56,15 +58,12 @@
     gap: var(--spacing-xl);
 }
 
-.tableSection {
-    padding: var(--spacing-xl);
-}
-
 .sectionTitle {
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: var(--spacing-lg);
     color: var(--text-primary);
+    font-family: var(--font-serif);
 }
 
 .emptyState {
@@ -72,6 +71,7 @@
     text-align: center;
     padding: var(--spacing-xl);
     font-style: italic;
+    font-family: var(--font-serif);
 }
 
 .table {
@@ -83,14 +83,16 @@
 .table th {
     padding: var(--spacing-sm) var(--spacing-md);
     color: var(--text-secondary);
-    font-weight: 500;
-    border-bottom: 1px solid var(--glass-border);
+    font-weight: 600;
+    font-family: var(--font-serif);
+    border-bottom: 2px solid rgba(229, 169, 61, 0.2);
 }
 
 .table td {
     padding: var(--spacing-md);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid var(--glass-border);
     vertical-align: middle;
+    color: var(--text-primary);
 }
 
 .actionGroup {
@@ -99,55 +101,94 @@
 }
 
 .btnApprove {
-    background: rgba(16, 185, 129, 0.1);
-    color: var(--success);
-    border: 1px solid rgba(16, 185, 129, 0.2);
+    background: rgba(79, 168, 139, 0.1);
+    color: var(--accent-green);
+    border: 1px solid rgba(79, 168, 139, 0.3);
     padding: 0.3rem 0.6rem;
     border-radius: var(--radius-sm);
     font-size: 0.85rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: var(--transition-smooth);
 }
 
 .btnApprove:hover {
-    background: var(--success);
+    background: var(--accent-green);
     color: white;
 }
 
 .btnReject {
-    background: rgba(239, 68, 68, 0.1);
-    color: var(--error);
-    border: 1px solid rgba(239, 68, 68, 0.2);
+    background: rgba(211, 61, 61, 0.1);
+    color: var(--accent-red);
+    border: 1px solid rgba(211, 61, 61, 0.3);
     padding: 0.3rem 0.6rem;
     border-radius: var(--radius-sm);
     font-size: 0.85rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: var(--transition-smooth);
 }
 
 .btnReject:hover {
-    background: var(--error);
+    background: var(--accent-red);
     color: white;
 }
 
 .roleAdmin {
-    background: rgba(239, 68, 68, 0.1);
-    color: var(--error);
-    padding: 0.2rem 0.5rem;
+    background: rgba(229, 169, 61, 0.15);
+    /* Gold for admin */
+    color: #B38612;
+    padding: 0.2rem 0.6rem;
     border-radius: var(--radius-full);
     font-size: 0.75rem;
     font-weight: 600;
 }
 
 .roleUser {
-    background: rgba(59, 130, 246, 0.1);
-    color: var(--info);
-    padding: 0.2rem 0.5rem;
+    background: rgba(79, 168, 139, 0.1);
+    color: var(--accent-green);
+    padding: 0.2rem 0.6rem;
     border-radius: var(--radius-full);
     font-size: 0.75rem;
     font-weight: 600;
+}
+
+/* API Tester */
+.apiInput {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(92, 85, 78, 0.2);
+    background: rgba(255, 255, 255, 0.8);
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-family: inherit;
+    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.apiInput:focus {
+    outline: none;
+    border-color: var(--accent-gold);
+    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.02), 0 0 0 3px rgba(229, 169, 61, 0.2);
+}
+
+.apiTextarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(92, 85, 78, 0.2);
+    background: rgba(255, 255, 255, 0.8);
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-family: inherit;
+    resize: vertical;
+    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.apiTextarea:focus {
+    outline: none;
+    border-color: var(--accent-gold);
+    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.02), 0 0 0 3px rgba(229, 169, 61, 0.2);
 }
 
 @media (max-width: 1024px) {

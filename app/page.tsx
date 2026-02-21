@@ -1,108 +1,113 @@
 import Link from "next/link";
+import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/ui/Card";
 import styles from "./page.module.css";
 
 export default function Home() {
   return (
     <main className={styles.main}>
-      {/* Background Animated Elements */}
-      <div className={styles.bgOrbs}></div>
-
-      {/* Hero Section */}
+      {/* Elegantly Spaced Hero Section */}
       <section className={styles.hero}>
-        <div className="animate-slide-up stagger-1">
-          <h1 className={styles.heroTitle}>
-            官府古建数字文创 <br />
-            <span className="text-gradient">AI 设计平台</span>
-          </h1>
-          <p className={styles.heroSubtitle}>
-            一键提取古建之美，极速生成文创大作。<br />
-            上传官府建筑照片，AI 智能捕捉雕花纹样与流光色彩，从设计到合规上架，仅需 3 个工作日。
-          </p>
-        </div>
+        <div className={styles.heroOverlay}></div>
 
-        <div className={`animate-fade-in stagger-2 ${styles.ctaGroup}`}>
-          <Link href="/studio" className="btn-primary animate-pulse">
-            进入 AI 设计工坊
-          </Link>
-          <Link href="/dashboard" className="btn-secondary">
-            查看合规授权闭环
-          </Link>
-        </div>
-      </section>
-
-      {/* The Core Shift: Pain Point vs Solution */}
-      <section className="section container">
-        <header className={styles.sectionHeader}>
-          <h2 className={styles.sectionTitle}>重塑古建文创生态</h2>
-          <p className={styles.sectionSubtitle}>专攻“设计难、授权慢、同质化”痛点，聚焦官府建筑单一品类做专做精</p>
-        </header>
-
-        <div className={styles.comparison}>
-          <div className={`${styles.comBox} ${styles.painPoint} glass-panel animate-slide-up stagger-3`}>
-            <h3 className={styles.comTitle}>
-              <span className="text-gradient">痛点 (Pain Points)</span>
-            </h3>
-            <ul className={styles.comList}>
-              <li>传统设计依赖专业团队，成本高昂</li>
-              <li>繁琐的线下审批，平均授权周期1-2个月</li>
-              <li>缺乏针对性，市场文创产品同质化严重</li>
-              <li>文化机构闭门造车，缺乏轻量化工具</li>
-            </ul>
+        <div className={`container ${styles.heroContent}`}>
+          {/* Left: Typography driven by "Leave Blank" (留白) philosophy */}
+          <div className={`${styles.heroText} animate-slide-up stagger-1`}>
+            <h1 className={styles.title}>
+              衙绘云契 <br />
+              <span className={styles.titleHighlight}>阳光下的古建筑与数字文创</span>
+            </h1>
+            <p className={styles.subtitle}>
+              让千年古建的木构与图腾，在云端重焕新生。<br />
+              智能提取专属徽章，赋予文创产品灵魂的数字协定。
+            </p>
+            <div className={styles.ctaGroup}>
+              <Link href="/studio">
+                <Button variant="primary" size="lg">进入工坊</Button>
+              </Link>
+              <Link href="/admin/dashboard">
+                <Button variant="secondary" size="lg">文创流转与确权</Button>
+              </Link>
+            </div>
           </div>
 
-          <div className={`${styles.comBox} ${styles.solution} glass-panel animate-slide-up stagger-4`}>
-            <h3 className={styles.comTitle}>
-              <span className="text-gradient">解决方案 (Our Solution)</span>
-            </h3>
-            <ul className={styles.comList}>
-              <li>零门槛轻量级工具，人人皆可是文创设计师</li>
-              <li>全线上合规授权，最快 <strong style={{ color: "var(--success)" }}>3个工作日</strong> 过审</li>
-              <li>智能提取专属元素，保障独特性与在地文化</li>
-              <li>一键生成手机壳、笔记本等高颜值实物图</li>
-            </ul>
+          {/* Right: Bright Version of Scanner Animation */}
+          <div className={`${styles.heroGraphic} animate-fade-in stagger-2`}>
+            <div className={styles.graphicContainer}>
+              <div className={styles.graphicOriginal}></div>
+              <div className={styles.graphicVector}></div>
+              <div className={styles.graphicScanner}></div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Core Features Grid */}
-      <section className={styles.featuresSection}>
-        <div className="container">
+      {/* Traditional Scroll (画卷) Layout Features */}
+      <section className={styles.scrollSection}>
+        <div className="container" style={{ position: 'relative' }}>
+          {/* Central Silk Thread (Timeline) */}
+          <div className={styles.silkThread}></div>
+
           <header className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>平台核心能力</h2>
+            <h2 className="animate-slide-up">国风雅韵，数字孪生</h2>
+            <p className="animate-slide-up stagger-1">将传统建筑语汇转化为现代数字资产</p>
           </header>
 
-          <div className={styles.grid}>
-            <div className={`${styles.card} glass-panel`}>
-              <div className={styles.cardIcon}>🏛️</div>
-              <h3 className={styles.cardTitle}>元素智能提取</h3>
-              <p className={styles.cardDesc}>
-                采用 Google Nano 边缘大模型，精准识别县衙、府衙照片中的匾额字体、飞檐脊兽、木雕纹理与古建色彩，零干扰提取核心元素。
-              </p>
+          <div className={styles.scrollLayout}>
+            {/* Scroll Feature 1: Image Left, Text Right */}
+            <div className={`${styles.scrollItem} ${styles.scrollItemLeft} animate-slide-up`}>
+              <div className={styles.scrollGraphic}>
+                <div className={styles.watermarkNumber}>01</div>
+                <Card variant="glass" padding="none" className={styles.graphicCard}>
+                  <div className={styles.graphicPlaceholder}>
+                    <span className={styles.iconCircleLg}>🌸</span>
+                  </div>
+                </Card>
+              </div>
+              <div className={styles.scrollText}>
+                <h3>古建图腾 AI 精准释义</h3>
+                <p>上传官署建筑构件照片，AI 自动进行语义解构，提取核心图案并转化为可无限放大的矢量图腾，彻底解放设计师的描线时间。</p>
+              </div>
             </div>
 
-            <div className={`${styles.card} glass-panel`}>
-              <div className={styles.cardIcon}>✨</div>
-              <h3 className={styles.cardTitle}>一键文创生成</h3>
-              <p className={styles.cardDesc}>
-                无需专业设计技能。将提取的美学元素自动映射至 3D 产品模型（手机壳、帆布袋、明信片），即刻预览高品质实物效果。
-              </p>
+            {/* Scroll Feature 2: Text Left, Image Right */}
+            <div className={`${styles.scrollItem} ${styles.scrollItemRight} animate-slide-up`}>
+              <div className={styles.scrollText}>
+                <h3>自动溯源与云端确权</h3>
+                <p>从灵感到实物，所有提取步骤与成品设计自动存证，一键生成合法商用授权书，保护原生文化版权。</p>
+              </div>
+              <div className={styles.scrollGraphic}>
+                <div className={styles.watermarkNumber}>02</div>
+                <Card variant="glass" padding="none" className={styles.graphicCard}>
+                  <div className={styles.graphicPlaceholder}>
+                    <span className={styles.iconCircleLg}>📜</span>
+                  </div>
+                </Card>
+              </div>
             </div>
 
-            <div className={`${styles.card} glass-panel`}>
-              <div className={styles.cardIcon}>⚖️</div>
-              <h3 className={styles.cardTitle}>合规授权闭环</h3>
-              <p className={styles.cardDesc}>
-                直连管理单位。提交设计后，通过平台专属审批通道，由机构在线签章确权，大幅缩短确权路径，保护创作者收益。
-              </p>
+            {/* Scroll Feature 3: Image Left, Text Right */}
+            <div className={`${styles.scrollItem} ${styles.scrollItemLeft} animate-slide-up`}>
+              <div className={styles.scrollGraphic}>
+                <div className={styles.watermarkNumber}>03</div>
+                <Card variant="glass" padding="none" className={styles.graphicCard}>
+                  <div className={styles.graphicPlaceholder}>
+                    <div className={styles.visualRays}>
+                      <div className={styles.ray}></div>
+                      <div className={styles.ray}></div>
+                      <div className={styles.ray}></div>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+              <div className={styles.scrollText}>
+                <h3>轻巧的衍生品车间</h3>
+                <p>即拖即用的 3D 样机映射，三分钟即可预览手机壳、折扇、茶盏上的图腾实际效果，立等可取的使用体验。</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
-
-      {/* Footer minimal */}
-      <footer style={{ textAlign: "center", padding: "var(--spacing-xl)", color: "var(--text-muted)" }}>
-        <p>© 2026 官府古建AI数字文创设计平台 | 挑战杯 & 计算机设计大赛专用项目</p>
-      </footer>
     </main>
   );
 }

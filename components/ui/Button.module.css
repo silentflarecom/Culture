@@ -1,0 +1,111 @@
+.button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    overflow: hidden;
+    transition: var(--transition-smooth);
+    border: 1px solid transparent;
+    outline: none;
+}
+
+.button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.hoverGlow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    opacity: 0;
+    z-index: 0;
+    transition: opacity 0.3s ease;
+}
+
+.button:hover .hoverGlow {
+    opacity: 0.15;
+}
+
+.button:active {
+    transform: scale(0.98);
+}
+
+/* --- Sizes --- */
+.size-sm {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.875rem;
+    border-radius: var(--radius-sm);
+}
+
+.size-md {
+    padding: 0.6rem 1.25rem;
+    font-size: 1rem;
+}
+
+.size-lg {
+    padding: 0.8rem 1.8rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    border-radius: var(--radius-lg);
+}
+
+.fullWidth {
+    width: 100%;
+}
+
+/* --- Variants --- */
+.variant-primary {
+    background: linear-gradient(135deg, var(--accent-red), #B03030);
+    color: #FFFFFF;
+    box-shadow: 0 4px 12px var(--accent-red-dim);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.variant-primary:hover {
+    box-shadow: 0 6px 16px rgba(211, 61, 61, 0.4);
+    transform: translateY(-2px);
+}
+
+.variant-secondary {
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: var(--text-primary);
+    border: 1px solid var(--accent-gold);
+    box-shadow: 0 2px 8px rgba(229, 169, 61, 0.1);
+}
+
+.variant-secondary:hover {
+    border-color: #C78D2A;
+    background: rgba(229, 169, 61, 0.1);
+    transform: translateY(-1px);
+}
+
+.variant-ghost {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid transparent;
+}
+
+.variant-ghost:hover {
+    background: rgba(92, 85, 78, 0.05);
+    /* very faint ink */
+    color: var(--text-primary);
+}

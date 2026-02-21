@@ -1,6 +1,8 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { AdminApiTester } from "./components/AdminApiTester";
+import { Card } from "@/components/ui/Card";
 import styles from "./page.module.css";
 
 export default async function AdminDashboard() {
@@ -25,38 +27,38 @@ export default async function AdminDashboard() {
     return (
         <main className={styles.container}>
             <header className={styles.header}>
-                <h1 className={styles.title}>系统管理后台</h1>
-                <p className={styles.subtitle}>欢迎, 管理员 {/* @ts-ignore */}{session?.user?.name}</p>
+                <h1 className={styles.title}>衙绘云契 · 系统管理后台</h1>
+                <p className={styles.subtitle}>欢迎, 管理员 {session?.user?.name}</p>
             </header>
 
             {/* Top Stats */}
             <section className={styles.statsGrid}>
-                <div className={`glass-panel ${styles.statCard}`}>
-                    <div className={styles.statLabel}>总注册用户</div>
+                <Card variant="glass" padding="md" className={styles.statCard}>
+                    <div className={styles.statLabel}>总注册工匠</div>
                     <div className={styles.statValue}>{usersCount}</div>
-                </div>
-                <div className={`glass-panel ${styles.statCard}`}>
-                    <div className={styles.statLabel}>AI 提取元素次数</div>
+                </Card>
+                <Card variant="glass" padding="md" className={styles.statCard}>
+                    <div className={styles.statLabel}>图腾提取次数</div>
                     <div className={styles.statValue}>{extractCount}</div>
-                </div>
-                <div className={`glass-panel ${styles.statCard}`}>
-                    <div className={styles.statLabel}>全网授权申请数</div>
+                </Card>
+                <Card variant="glass" padding="md" className={styles.statCard}>
+                    <div className={styles.statLabel}>云契授权申请</div>
                     <div className={styles.statValue}>{authCount}</div>
-                </div>
+                </Card>
             </section>
 
             <div className={styles.splitLayout}>
                 {/* Pending Authorizations */}
-                <section className={`glass-panel ${styles.tableSection}`}>
-                    <h2 className={styles.sectionTitle}>待处理的授权申请 (人工审核)</h2>
+                <Card variant="glass" className={styles.tableSection}>
+                    <h2 className={styles.sectionTitle}>待签核契约 (人工审核)</h2>
                     {pendingAuths.length === 0 ? (
-                        <p className={styles.emptyState}>暂无需要审核的授权申请</p>
+                        <p className={styles.emptyState}>卷帙清空，暂无待审契约</p>
                     ) : (
                         <table className={styles.table}>
                             <thead>
                                 <tr>
-                                    <th>申请文创</th>
-                                    <th>提取来源</th>
+                                    <th>文创巧思</th>
+                                    <th>寻源觅迹</th>
                                     <th>申请人</th>
                                     <th>操作</th>
                                 </tr>
@@ -69,8 +71,8 @@ export default async function AdminDashboard() {
                                         <td>{auth.user.name || auth.user.email}</td>
                                         <td>
                                             <div className={styles.actionGroup}>
-                                                <button className={styles.btnApprove}>通过</button>
-                                                <button className={styles.btnReject}>驳回</button>
+                                                <button className={styles.btnApprove}>赐准</button>
+                                                <button className={styles.btnReject}>批驳</button>
                                             </div>
                                         </td>
                                     </tr>
@@ -78,32 +80,32 @@ export default async function AdminDashboard() {
                             </tbody>
                         </table>
                     )}
-                </section>
+                </Card>
 
                 {/* Recent Users */}
-                <section className={`glass-panel ${styles.tableSection}`}>
-                    <h2 className={styles.sectionTitle}>新注册用户</h2>
+                <Card variant="glass" className={styles.tableSection}>
+                    <h2 className={styles.sectionTitle}>新晋工匠</h2>
                     {recentUsers.length === 0 ? (
-                        <p className={styles.emptyState}>暂无用户注册</p>
+                        <p className={styles.emptyState}>暂无新工匠造访</p>
                     ) : (
                         <table className={styles.table}>
                             <thead>
                                 <tr>
-                                    <th>名称</th>
-                                    <th>角色</th>
-                                    <th>注册时间</th>
+                                    <th>名号</th>
+                                    <th>职级</th>
+                                    <th>入籍时辰</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {recentUsers.map((u) => (
                                     <tr key={u.id}>
                                         <td>
-                                            <div style={{ fontWeight: 500 }}>{u.name || "未命名"}</div>
+                                            <div style={{ fontWeight: 500 }}>{u.name || "未定名"}</div>
                                             <div style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>{u.email}</div>
                                         </td>
                                         <td>
                                             <span className={u.role === "ADMIN" ? styles.roleAdmin : styles.roleUser}>
-                                                {u.role}
+                                                {u.role === "ADMIN" ? "典史" : "工匠"}
                                             </span>
                                         </td>
                                         <td style={{ fontSize: "0.85rem", color: "var(--text-secondary)" }}>
@@ -114,8 +116,9 @@ export default async function AdminDashboard() {
                             </tbody>
                         </table>
                     )}
-                </section>
+                </Card>
             </div>
+            <AdminApiTester />
         </main>
     );
 }

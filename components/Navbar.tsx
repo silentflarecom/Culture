@@ -10,7 +10,7 @@ export function Navbar() {
     return (
         <nav className={styles.navbar}>
             <Link href="/" className={styles.brand}>
-                🏛️ 古建文创 AI
+                <span style={{ fontSize: '1.2em' }}>🏮</span> 衙绘云契
             </Link>
 
             <div className={styles.links}>

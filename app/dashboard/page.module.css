@@ -1,210 +1,428 @@
 .container {
     padding: var(--spacing-3xl) var(--spacing-xl);
-    max-width: 1200px;
+    max-width: 1440px;
     margin: 0 auto;
     min-height: 100vh;
 }
 
+/* ============================
+   Top Bar
+============================ */
 .header {
-    margin-bottom: var(--spacing-2xl);
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
+    margin-bottom: var(--spacing-3xl);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid rgba(229, 169, 61, 0.2);
+}
+
+.headerTitleArea {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
 }
 
 .title {
-    font-size: 2.5rem;
-    margin-bottom: var(--spacing-xs);
+    font-size: 2rem;
+    color: var(--text-primary);
 }
 
-.subtitle {
+.badge {
+    padding: 4px 12px;
+    background: rgba(212, 175, 55, 0.15);
+    border: 1px solid var(--accent-gold);
+    color: var(--accent-gold);
+    border-radius: var(--radius-full);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.notificationBubble {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    background: rgba(255, 255, 255, 0.8);
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(229, 169, 61, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.notificationBubble:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.icon {
+    font-size: 1.2rem;
+}
+
+.pulseCount {
+    background: var(--error);
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+    animation: bubblePulse 2s infinite;
+}
+
+@keyframes bubblePulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+    }
+
+    70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+    }
+}
+
+.notifText {
     color: var(--text-secondary);
-    font-size: 1.1rem;
+    font-size: 0.95rem;
 }
 
-/* Stats Row */
+/* ============================
+   Data Cards (Number Ticker)
+============================ */
 .statsGrid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: var(--spacing-lg);
-    margin-bottom: var(--spacing-2xl);
+    margin-bottom: var(--spacing-3xl);
 }
 
 .statCard {
-    padding: var(--spacing-lg);
+    padding: var(--spacing-xl);
     border-radius: var(--radius-lg);
     display: flex;
-    align-items: center;
-    gap: var(--spacing-md);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
+    flex-direction: column;
+    justify-content: center;
+    transition: transform 0.3s;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(250, 245, 235, 0.7));
+    border: 1px solid rgba(229, 169, 61, 0.15);
+    box-shadow: 0 4px 12px rgba(119, 107, 95, 0.05);
 }
 
 .statCard:hover {
-    transform: translateY(-3px);
+    transform: translateY(-5px);
 }
 
-.statIcon {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.05);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-}
-
-.statValue {
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: 1.2;
+.statHighlight {
+    border-left: 4px solid var(--accent-gold);
+    background: linear-gradient(145deg, rgba(229, 169, 61, 0.1), rgba(250, 245, 235, 0.8));
 }
 
 .statLabel {
     color: var(--text-secondary);
-    font-size: 0.9rem;
+    font-size: 1.05rem;
+    margin-bottom: var(--spacing-sm);
+    font-family: var(--font-sans);
 }
 
-.goldIcon {
-    color: var(--accent-gold);
-    background: var(--accent-gold-dim);
+.statValue {
+    font-size: 2.8rem;
+    font-weight: 700;
+    font-family: var(--font-sans);
+    color: var(--text-primary);
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
 }
 
-.greenIcon {
+.timeHighlight {
     color: var(--success);
-    background: rgba(16, 185, 129, 0.2);
+    text-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
 }
 
-.blueIcon {
-    color: var(--info);
-    background: rgba(59, 130, 246, 0.2);
+.unit {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--text-muted);
 }
 
-/* Table Section */
-.tableContainer {
-    padding: var(--spacing-xl);
+.statSubtag {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    background: rgba(0, 0, 0, 0.2);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    margin-left: auto;
+    border: 1px solid rgba(229, 169, 61, 0.2);
+}
+
+/* ============================
+   Timeline Component
+============================ */
+.timelineSection {
+    padding: var(--spacing-2xl);
     border-radius: var(--radius-xl);
-    overflow-x: auto;
 }
 
-.tableHeader {
+.sectionHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.sectionTitle {
+    font-size: 1.6rem;
+    color: var(--text-primary);
+}
+
+.filterTag {
+    color: var(--success);
+    background: rgba(16, 185, 129, 0.1);
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-size: 0.9rem;
+}
+
+.timelineItem {
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(229, 169, 61, 0.2);
+    box-shadow: 0 4px 12px rgba(119, 107, 95, 0.05);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
     margin-bottom: var(--spacing-lg);
 }
 
-.tableTitle {
-    font-size: 1.25rem;
-    font-weight: 600;
+.itemCompleted {
+    opacity: 0.6;
+    background: transparent;
 }
 
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
+.itemInfo {
+    margin-bottom: var(--spacing-xl);
 }
 
-.table th {
-    padding: var(--spacing-sm) var(--spacing-md);
+.itemInfo h3 {
+    font-size: 1.3rem;
+    margin-bottom: var(--spacing-xs);
+}
+
+.itemInfo p {
     color: var(--text-secondary);
-    font-weight: 500;
-    border-bottom: 1px solid var(--glass-border);
+    font-size: 0.95rem;
 }
 
-.table td {
-    padding: var(--spacing-md);
-    vertical-align: middle;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+.dateInfo {
+    color: var(--text-muted);
 }
 
-.table tr:last-child td {
-    border-bottom: none;
-}
-
-/* Status Badges */
-.badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.25rem 0.75rem;
-    border-radius: var(--radius-full);
-    font-size: 0.85rem;
-    font-weight: 600;
-    gap: 0.25rem;
-}
-
-.badge::before {
-    content: '';
-    display: block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-}
-
-.badgePending {
-    background: rgba(245, 158, 11, 0.1);
-    color: var(--warning);
-    border: 1px solid rgba(245, 158, 11, 0.2);
-}
-
-.badgePending::before {
-    background: var(--warning);
-}
-
-.badgeApproved {
-    background: rgba(16, 185, 129, 0.1);
-    color: var(--success);
-    border: 1px solid rgba(16, 185, 129, 0.2);
-}
-
-.badgeApproved::before {
-    background: var(--success);
-}
-
-/* Progress Flow */
-.processFlow {
+/* Horizontal Timeline Layout */
+.timeline {
     display: flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-    margin-top: 0.5rem;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: relative;
+    padding: 0 var(--spacing-xl);
 }
 
 .step {
-    width: 12px;
-    height: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    width: 140px;
+    text-align: center;
+}
+
+.stepCircle {
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-primary);
+    border: 2px solid var(--accent-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-sm);
+    transition: all 0.3s;
+}
+
+/* Active Step Pulse Effect (Breathing Light) */
+.stepCirclePulse {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(212, 175, 55, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-sm);
     position: relative;
 }
 
-.stepIcon {
-    font-size: 12px;
-}
-
-.stepLine {
-    width: 20px;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.stepActive {
+.innerCircle {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
     background: var(--accent-gold);
     box-shadow: 0 0 10px var(--accent-gold);
+    position: relative;
+    z-index: 2;
 }
 
-.lineActive {
-    background: var(--accent-gold);
+.stepCirclePulse::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 2px solid var(--accent-gold);
+    animation: breatheLight 2s infinite ease-out;
 }
 
-.stepDone {
+@keyframes breatheLight {
+    0% {
+        transform: scale(0.6);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+.stepTitle {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.stepTime {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Completed State */
+.stepCompleted .stepCircle {
+    background: var(--success);
+    border-color: var(--success);
+    color: white;
+}
+
+.stepCompleted .stepTitle {
+    color: var(--text-primary);
+}
+
+/* Active State */
+.stepActive .stepTitle {
+    color: var(--accent-gold);
+}
+
+.stepActive .stepTime {
+    color: var(--accent-gold);
+}
+
+.signBtn {
+    margin-top: var(--spacing-sm);
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+}
+
+/* Pending State */
+.stepPending .stepTitle {
+    color: var(--text-muted);
+}
+
+/* Connecting Lines */
+.stepLine {
+    flex: 1;
+    height: 2px;
+    background: rgba(229, 169, 61, 0.2);
+    margin-top: 15px;
+    position: relative;
+    z-index: 1;
+}
+
+.lineCompleted {
     background: var(--success);
 }
 
-@media (max-width: 768px) {
-    .header {
+/* Animated gradient line leading to active step */
+.lineActive {
+    background: linear-gradient(90deg, var(--success), var(--accent-gold));
+    position: relative;
+    overflow: hidden;
+}
+
+.lineActive::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 30%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+    animation: flowLight 2s infinite linear;
+}
+
+@keyframes flowLight {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(400%);
+    }
+}
+
+.authCode {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-md);
+    border-top: 1px dashed rgba(229, 169, 61, 0.3);
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+.authCode span {
+    color: var(--accent-gold);
+    font-family: monospace;
+    font-size: 1.1rem;
+    margin-left: 8px;
+    user-select: all;
+}
+
+@media (max-width: 992px) {
+    .timeline {
         flex-direction: column;
         align-items: flex-start;
-        gap: var(--spacing-md);
+        padding: 0;
+    }
+
+    .step {
+        width: 100%;
+        flex-direction: row;
+        text-align: left;
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .stepCircle,
+    .stepCirclePulse {
+        margin-bottom: 0;
+        margin-right: var(--spacing-md);
+    }
+
+    .stepLine {
+        display: none;
     }
 }

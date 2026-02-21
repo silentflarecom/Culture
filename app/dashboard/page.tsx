@@ -1,153 +1,178 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import styles from "./page.module.css";
+
+// A simple Number Ticker Component
+const NumberTicker = ({ end, duration = 2000, prefix = "", suffix = "", isFloat = false }: { end: number, duration?: number, prefix?: string, suffix?: string, isFloat?: boolean }) => {
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        let startTime: number | null = null;
+        let animationFrame: number;
+
+        const animate = (timestamp: number) => {
+            if (!startTime) startTime = timestamp;
+            const progress = timestamp - startTime;
+            const percentage = Math.min(progress / duration, 1);
+
+            // easeOutQuart
+            const easeOut = 1 - Math.pow(1 - percentage, 4);
+            const currentCount = end * easeOut;
+
+            setCount(currentCount);
+
+            if (percentage < 1) {
+                animationFrame = requestAnimationFrame(animate);
+            } else {
+                setCount(end);
+            }
+        };
+
+        animationFrame = requestAnimationFrame(animate);
+        return () => cancelAnimationFrame(animationFrame);
+    }, [end, duration]);
+
+    return <span>{prefix}{isFloat ? count.toFixed(1) : Math.floor(count)}{suffix}</span>;
+};
+
 
 export default function DashboardPage() {
     return (
         <main className={styles.container}>
+            {/* Top Bar matching requirements */}
             <header className={`animate-fade-in ${styles.header}`}>
-                <div>
-                    <h1 className={styles.title}>合规授权控制台</h1>
-                    <p className={styles.subtitle}>直连全国官府古建管理单位，实现 3 个工作日极速维权与商用授权</p>
+                <div className={styles.headerTitleArea}>
+                    <h1 className={styles.title}>衙绘云契 · 数字资产管理后台</h1>
+                    <span className={styles.badge}>文物保护单位专属视角</span>
                 </div>
-                <Link href="/studio" className="btn-secondary">
-                    + 新建 AI 提取设计
-                </Link>
+
+                <div className={styles.headerActions}>
+                    <div className={styles.notificationBubble}>
+                        <span className={styles.icon}>🔔</span>
+                        <span className={styles.pulseCount}>3</span>
+                        <span className={styles.notifText}>条待处理授权</span>
+                    </div>
+                </div>
             </header>
 
-            {/* Stats Summary */}
+            {/* Data Overview Cards with Number Ticker */}
             <section className={`animate-slide-up stagger-1 ${styles.statsGrid}`}>
                 <div className={`glass-panel ${styles.statCard}`}>
-                    <div className={`${styles.statIcon} ${styles.blueIcon}`}>📄</div>
-                    <div>
-                        <div className={styles.statValue}>12</div>
-                        <div className={styles.statLabel}>已提交申请总数</div>
+                    <div className={styles.statLabel}>累计提取元素数量</div>
+                    <div className={styles.statValue}>
+                        <NumberTicker end={1284} /> <span className={styles.unit}>个</span>
                     </div>
                 </div>
+
                 <div className={`glass-panel ${styles.statCard}`}>
-                    <div className={`${styles.statIcon} ${styles.greenIcon}`}>✓</div>
-                    <div>
-                        <div className={styles.statValue}>8</div>
-                        <div className={styles.statLabel}>已通过确权授权</div>
+                    <div className={styles.statLabel}>已授权文创 SKU</div>
+                    <div className={styles.statValue}>
+                        <NumberTicker end={356} /> <span className={styles.unit}>款</span>
                     </div>
                 </div>
+
+                <div className={`glass-panel ${styles.statCard} ${styles.statHighlight}`}>
+                    <div className={styles.statLabel}>平均授权周期</div>
+                    <div className={`${styles.statValue} ${styles.timeHighlight}`}>
+                        <NumberTicker end={2.8} isFloat={true} /> <span className={styles.unit}>天</span>
+                        <span className={styles.statSubtag}>行业平均 45 天</span>
+                    </div>
+                </div>
+
                 <div className={`glass-panel ${styles.statCard}`}>
-                    <div className={`${styles.statIcon} ${styles.goldIcon}`}>⏳</div>
-                    <div>
-                        <div className={styles.statValue}>4</div>
-                        <div className={styles.statLabel}>内乡县衙审批中</div>
+                    <div className={styles.statLabel}>预估分润收益</div>
+                    <div className={styles.statValue}>
+                        <NumberTicker end={245000} prefix="¥" />
                     </div>
                 </div>
             </section>
 
-            {/* Table Area */}
-            <section className={`animate-slide-up stagger-2 ${styles.tableContainer} glass-panel`}>
-                <div className={styles.tableHeader}>
-                    <h2 className={styles.tableTitle}>最近申请及审批进度</h2>
+            {/* Main Content Area - Authorization Timeline Tracking */}
+            <section className={`animate-slide-up stagger-2 ${styles.timelineSection} glass-panel`}>
+                <header className={styles.sectionHeader}>
+                    <h2 className={styles.sectionTitle}>文创产品授权流转追踪</h2>
+                    <span className={styles.filterTag}>当前正在处理 (1)</span>
+                </header>
+
+                <div className={styles.timelineItem}>
+                    <div className={styles.itemInfo}>
+                        <h3>平遥县衙朱涂帆布袋</h3>
+                        <p>申请人: 独立设计师 张维 <span className={styles.dateInfo}>| 提交于: 10小时前</span></p>
+                    </div>
+
+                    {/* Timeline Flow */}
+                    <div className={styles.timeline}>
+                        {/* Step 1 */}
+                        <div className={`${styles.step} ${styles.stepCompleted}`}>
+                            <div className={styles.stepCircle}>✓</div>
+                            <div className={styles.stepTitle}>申请提交</div>
+                            <div className={styles.stepTime}>09:00</div>
+                        </div>
+
+                        <div className={`${styles.stepLine} ${styles.lineCompleted}`}></div>
+
+                        {/* Step 2 */}
+                        <div className={`${styles.step} ${styles.stepCompleted}`}>
+                            <div className={styles.stepCircle}>✓</div>
+                            <div className={styles.stepTitle}>AI 查重比对通过</div>
+                            <div className={styles.stepTime}>09:05</div>
+                        </div>
+
+                        <div className={`${styles.stepLine} ${styles.lineActive}`}></div>
+
+                        {/* Step 3 - Active with Pulse */}
+                        <div className={`${styles.step} ${styles.stepActive}`}>
+                            <div className={styles.stepCirclePulse}>
+                                <div className={styles.innerCircle}></div>
+                            </div>
+                            <div className={styles.stepTitle}>电子合同签署</div>
+                            <div className={styles.stepTime}>等待签章...</div>
+                            <button className={`btn-primary ${styles.signBtn}`}>进入签章</button>
+                        </div>
+
+                        <div className={styles.stepLine}></div>
+
+                        {/* Step 4 */}
+                        <div className={`${styles.step} ${styles.stepPending}`}>
+                            <div className={styles.stepCircle}></div>
+                            <div className={styles.stepTitle}>授权码发放</div>
+                            <div className={styles.stepTime}>-</div>
+                        </div>
+                    </div>
                 </div>
 
-                <table className={styles.table}>
-                    <thead>
-                        <tr>
-                            <th>文创设计项 / 提取来源</th>
-                            <th>申请确权人</th>
-                            <th>管理单位</th>
-                            <th>状态</th>
-                            <th>审批追踪 (3天闭环)</th>
-                            <th>操作</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {/* Row 1 - Pending */}
-                        <tr>
-                            <td>
-                                <div style={{ fontWeight: 500, color: "var(--text-primary)" }}>国潮云龙手机壳</div>
-                                <div style={{ fontSize: "0.85rem" }}>元素提取: 内乡现衙正脊</div>
-                            </td>
-                            <td>独立设计师 User</td>
-                            <td>内乡县衙博物馆</td>
-                            <td>
-                                <span className={`${styles.badge} ${styles.badgePending}`}>审批中 (Day 2)</span>
-                            </td>
-                            <td>
-                                <div className={styles.processFlow}>
-                                    <div className={`${styles.step} ${styles.stepDone}`}></div>
-                                    <div className={`${styles.stepLine} ${styles.lineActive}`}></div>
-                                    <div className={`${styles.step} ${styles.stepActive}`}></div>
-                                    <div className={styles.stepLine}></div>
-                                    <div className={styles.step}></div>
-                                </div>
-                                <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "4px" }}>
-                                    专家合规复核中
-                                </div>
-                            </td>
-                            <td>
-                                <button className="btn-secondary" style={{ padding: "0.4rem 0.8rem", fontSize: "0.85rem" }}>
-                                    查看回执
-                                </button>
-                            </td>
-                        </tr>
+                {/* Recently Completed (Visual Context) */}
+                <div className={`${styles.timelineItem} ${styles.itemCompleted}`}>
+                    <div className={styles.itemInfo}>
+                        <h3>大堂彩绘书签系列</h3>
+                        <p>申请人: 文创工作室 <span className={styles.dateInfo}>| 完成于: 昨天</span></p>
+                    </div>
 
-                        {/* Row 2 - Approved */}
-                        <tr>
-                            <td>
-                                <div style={{ fontWeight: 500, color: "var(--text-primary)" }}>平遥县衙朱涂帆布袋</div>
-                                <div style={{ fontSize: "0.85rem" }}>元素提取: 平遥县衙大堂彩绘</div>
-                            </td>
-                            <td>独立设计师 User</td>
-                            <td>平遥古城管委会</td>
-                            <td>
-                                <span className={`${styles.badge} ${styles.badgeApproved}`}>已授权</span>
-                            </td>
-                            <td>
-                                <div className={styles.processFlow}>
-                                    <div className={`${styles.step} ${styles.stepDone}`}></div>
-                                    <div className={`${styles.stepLine} ${styles.stepDone}`}></div>
-                                    <div className={`${styles.step} ${styles.stepDone}`}></div>
-                                    <div className={`${styles.stepLine} ${styles.stepDone}`}></div>
-                                    <div className={`${styles.step} ${styles.stepDone}`}></div>
-                                </div>
-                                <div style={{ fontSize: "0.75rem", color: "var(--success)", marginTop: "4px" }}>
-                                    已获得商用数字版权
-                                </div>
-                            </td>
-                            <td>
-                                <button className="btn-primary" style={{ padding: "0.4rem 0.8rem", fontSize: "0.85rem" }}>
-                                    下载授权书
-                                </button>
-                            </td>
-                        </tr>
+                    <div className={styles.timeline}>
+                        <div className={`${styles.step} ${styles.stepCompleted}`}>
+                            <div className={styles.stepTitle}>申请提交</div>
+                        </div>
+                        <div className={`${styles.stepLine} ${styles.lineCompleted}`}></div>
+                        <div className={`${styles.step} ${styles.stepCompleted}`}>
+                            <div className={styles.stepTitle}>AI 查重比对通过</div>
+                        </div>
+                        <div className={`${styles.stepLine} ${styles.lineCompleted}`}></div>
+                        <div className={`${styles.step} ${styles.stepCompleted}`}>
+                            <div className={styles.stepTitle}>电子合同签署</div>
+                        </div>
+                        <div className={`${styles.stepLine} ${styles.lineCompleted}`}></div>
+                        <div className={`${styles.step} ${styles.stepCompleted}`}>
+                            <div className={styles.stepTitle}>授权码发放</div>
+                        </div>
+                    </div>
 
-                        {/* Row 3 - Approved */}
-                        <tr>
-                            <td>
-                                <div style={{ fontWeight: 500, color: "var(--text-primary)" }}>惊堂木U盘 / 漆画</div>
-                                <div style={{ fontSize: "0.85rem" }}>元素提取: 霍州署惊堂木构造</div>
-                            </td>
-                            <td>独立设计师 User</td>
-                            <td>霍州署文物保管所</td>
-                            <td>
-                                <span className={`${styles.badge} ${styles.badgeApproved}`}>已授权</span>
-                            </td>
-                            <td>
-                                <div className={styles.processFlow}>
-                                    <div className={`${styles.step} ${styles.stepDone}`}></div>
-                                    <div className={`${styles.stepLine} ${styles.stepDone}`}></div>
-                                    <div className={`${styles.step} ${styles.stepDone}`}></div>
-                                    <div className={`${styles.stepLine} ${styles.stepDone}`}></div>
-                                    <div className={`${styles.step} ${styles.stepDone}`}></div>
-                                </div>
-                                <div style={{ fontSize: "0.75rem", color: "var(--success)", marginTop: "4px" }}>
-                                    已获得商用数字版权
-                                </div>
-                            </td>
-                            <td>
-                                <button className="btn-primary" style={{ padding: "0.4rem 0.8rem", fontSize: "0.85rem" }}>
-                                    下载授权书
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <div className={styles.authCode}>
+                        授权码: <span>PY2026-000451X</span>
+                    </div>
+                </div>
+
             </section>
         </main>
     );

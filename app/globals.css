@@ -1,31 +1,45 @@
-/* CSS Variables & Design Tokens */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Variables & Design Tokens - Bright, Sunny Ancient Style (衙绘云契) */
 :root {
-  /* Rich Dark Aesthetic Palette */
-  --bg-primary: #0A0A0C; /* Deep dark for premium feel */
-  --bg-secondary: #121316; /* Slight elevation */
-  --bg-tertiary: #1A1C20; /* Card backgrounds */
-  
+  /* Bright, warm aesthetic palette */
+  --bg-primary: #FAFAFA;
+  /* Bright Xuan paper white */
+  --bg-secondary: #F5F1E7;
+  /* Light beige/silk */
+  --bg-tertiary: #FFFFFF;
+  /* Pure white for cards */
+
   /* Text Colors */
-  --text-primary: #FFFFFF;
-  --text-secondary: #A0A5B1;
-  --text-muted: #666B74;
-  
-  /* Accents - Ancient Yamen Gold / Vermilion Red */
-  --accent-gold: #D4AF37;
-  --accent-gold-dim: rgba(212, 175, 55, 0.2);
-  --accent-red: #8B1C1C;
-  --accent-red-dim: rgba(139, 28, 28, 0.2);
-  
+  --text-primary: #2C2825;
+  /* Dark ink brown/black */
+  --text-secondary: #5C554E;
+  /* Lighter ink */
+  --text-muted: #8C847B;
+
+  /* Accents - Vibrant Vermilion Red / Sunny Gold / Celadon */
+  --accent-gold: #E5A93D;
+  /* Sunny gold */
+  --accent-gold-dim: rgba(229, 169, 61, 0.2);
+  --accent-red: #D33D3D;
+  /* Bright vermilion */
+  --accent-red-dim: rgba(211, 61, 61, 0.2);
+  --accent-green: #4FA88B;
+  /* Vibrant celadon/teal for dynamic feel */
+
   /* Technical UI Colors */
   --success: #10B981;
   --warning: #F59E0B;
   --error: #EF4444;
   --info: #3B82F6;
 
-  /* Glassmorphism */
-  --glass-bg: rgba(20, 22, 26, 0.65);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-glow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  /* Glassmorphism - Bright Version */
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-glow: 0 8px 32px rgba(92, 85, 78, 0.08);
+  /* Soft ink shadow */
 
   /* Spacing */
   --spacing-xs: 0.25rem;
@@ -35,7 +49,7 @@
   --spacing-xl: 2rem;
   --spacing-2xl: 3rem;
   --spacing-3xl: 5rem;
-  
+
   /* Borders */
   --radius-sm: 4px;
   --radius-md: 8px;
@@ -46,16 +60,22 @@
   /* Font Families */
   --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
   --font-serif: var(--font-noto-serif), Georgia, Cambria, "Times New Roman", Times, serif;
+
+  /* Animation Curves */
+  --transition-smooth: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 /* Base Reset */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html, body {
+html,
+body {
   width: 100%;
   min-height: 100vh;
   background-color: var(--bg-primary);
@@ -67,7 +87,12 @@ html, body {
   overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-serif);
   font-weight: 600;
   line-height: 1.2;
@@ -106,99 +131,125 @@ img {
   padding: var(--spacing-3xl) 0;
 }
 
-.flex { display: flex; }
-.flex-col { flex-direction: column; }
-.items-center { align-items: center; }
-.justify-center { justify-content: center; }
-.justify-between { justify-content: space-between; }
-.gap-sm { gap: var(--spacing-sm); }
-.gap-md { gap: var(--spacing-md); }
-.gap-lg { gap: var(--spacing-lg); }
+.flex {
+  display: flex;
+}
 
-/* --- UI Component Utilities --- */
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.gap-sm {
+  gap: var(--spacing-sm);
+}
+
+.gap-md {
+  gap: var(--spacing-md);
+}
+
+.gap-lg {
+  gap: var(--spacing-lg);
+}
+
+/* --- Global Aesthetics Utilities --- */
 .glass-panel {
   background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-glow);
   border-radius: var(--radius-lg);
 }
 
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, var(--accent-gold), #B08D25);
-  color: #0A0A0C;
-  font-weight: 600;
-  padding: 0.75rem 1.5rem;
-  border-radius: var(--radius-full);
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px var(--accent-gold-dim);
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
-}
-
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  color: var(--text-primary);
-  font-weight: 500;
-  padding: 0.75rem 1.5rem;
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-full);
-  transition: all 0.3s ease;
-}
-
-.btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
 .text-gradient {
-  background: linear-gradient(to right, #FFF, var(--accent-gold));
+  background: linear-gradient(135deg, var(--accent-red), var(--accent-gold));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
+/* Global Animated Background - Breathing effect */
+.global-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 15% 50%, rgba(229, 169, 61, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 85% 30%, rgba(79, 168, 139, 0.03) 0%, transparent 50%);
+  animation: breathingBg 20s ease-in-out infinite alternate;
+}
+
+@keyframes breathingBg {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
 /* --- Micro-Animations --- */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
 
-@keyframes pulseGlow {
-  0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
-  70% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.8s ease-out forwards;
+  animation: fadeIn 0.8s var(--transition-smooth) forwards;
 }
 
 .animate-slide-up {
-  animation: slideUp 0.8s ease-out forwards;
+  animation: slideUp 0.8s var(--transition-smooth) forwards;
 }
 
-.animate-pulse {
-  animation: pulseGlow 2s infinite;
+.stagger-1 {
+  animation-delay: 0.1s;
 }
 
-/* Default state for stagger elements */
-.stagger-1 { animation-delay: 0.1s; }
-.stagger-2 { animation-delay: 0.2s; }
-.stagger-3 { animation-delay: 0.3s; }
-.stagger-4 { animation-delay: 0.4s; }
+.stagger-2 {
+  animation-delay: 0.2s;
+}
+
+.stagger-3 {
+  animation-delay: 0.3s;
+}
+
+.stagger-4 {
+  animation-delay: 0.4s;
+}

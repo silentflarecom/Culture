@@ -16,7 +16,7 @@ const notoSerif = Noto_Serif_SC({
 });
 
 export const metadata: Metadata = {
-  title: "Ancient Yamen AI | 官府古建数字文创",
+  title: "衙绘云契 | 官府古建数字文创",
   description: "AI-powered digital cultural creative platform for ancient government buildings with one-click compliant authorization.",
 };
 
@@ -28,6 +28,9 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <body className={`${inter.variable} ${notoSerif.variable}`}>
+        {/* Global Breathing Background Elements */}
+        <div className="global-bg" />
+
         <Providers>
           <Navbar />
           {children}

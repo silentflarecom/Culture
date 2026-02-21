@@ -8,21 +8,24 @@
     justify-content: space-between;
     align-items: center;
     z-index: 100;
-    background: rgba(10, 10, 12, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--glass-border);
+    box-shadow: var(--glass-glow);
 }
 
 .brand {
     font-family: var(--font-serif);
     font-size: 1.25rem;
     font-weight: 600;
-    color: var(--accent-gold);
+    color: var(--accent-red);
+    /* Replace gold with vermilion red for pop */
     text-decoration: none;
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
+    letter-spacing: 0.05em;
 }
 
 .links {
@@ -34,11 +37,15 @@
 .navLink {
     color: var(--text-secondary);
     font-weight: 500;
-    transition: color 0.2s ease;
+    transition: var(--transition-smooth);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-md);
 }
 
 .navLink:hover {
-    color: var(--text-primary);
+    color: var(--accent-gold);
+    background: rgba(229, 169, 61, 0.05);
+    /* Subtle hover fill */
 }
 
 .authGroup {
@@ -61,6 +68,7 @@
     font-size: 0.75rem;
     font-weight: 600;
     margin-left: var(--spacing-xs);
+    box-shadow: 0 2px 8px var(--accent-red-dim);
 }
 
 @media (max-width: 768px) {

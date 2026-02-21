@@ -1,215 +1,370 @@
 .main {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 100%;
-  position: relative;
-  overflow: hidden;
 }
 
-/* Background Animated Orbs */
-.bgOrbs {
+/* ============================
+   Hero Section
+============================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background-image: url('https://images.unsplash.com/photo-1543336761-a02ffde32709?q=80&w=2000&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center 20%;
+  background-attachment: scroll;
+}
+
+.heroOverlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  z-index: -1;
-  background: radial-gradient(circle at 15% 50%, rgba(212, 175, 55, 0.05), transparent 40%),
-    radial-gradient(circle at 85% 30%, rgba(139, 28, 28, 0.05), transparent 40%);
-}
-
-/* Hero Section */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 0 var(--spacing-md);
-  position: relative;
+  height: 100%;
+  background: linear-gradient(135deg,
+      rgba(250, 250, 250, 0.95) 0%,
+      rgba(245, 241, 231, 0.8) 50%,
+      rgba(255, 255, 255, 0.9) 100%);
   z-index: 1;
 }
 
-.heroTitle {
-  font-size: clamp(2.5rem, 5vw + 1rem, 5.5rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  margin-bottom: var(--spacing-md);
-  line-height: 1.1;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+.heroContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-3xl);
+  padding-top: var(--spacing-3xl);
+  padding-bottom: var(--spacing-3xl);
 }
 
-.heroSubtitle {
-  font-family: var(--font-sans);
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  color: var(--text-secondary);
+@media (min-width: 1024px) {
+  .heroContent {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+/* Hero Typography */
+.heroText {
+  flex: 1;
   max-width: 600px;
+}
+
+.title {
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.2;
+}
+
+.titleHighlight {
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  font-weight: 500;
+  display: block;
+  margin-top: var(--spacing-sm);
+  background: linear-gradient(135deg, var(--accent-red), var(--accent-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
   margin-bottom: var(--spacing-2xl);
-  line-height: 1.6;
+  line-height: 1.8;
 }
 
 .ctaGroup {
   display: flex;
   gap: var(--spacing-md);
-  margin-top: var(--spacing-lg);
+  flex-wrap: wrap;
 }
 
-/* Features Section */
-.featuresSection {
+/* ============================
+   Hero Right Graphic (Sunlit Scanner Version)
+============================ */
+.heroGraphic {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  padding: var(--spacing-3xl) 0;
+}
+
+.graphicContainer {
   position: relative;
-  background: linear-gradient(to bottom, transparent, var(--bg-secondary), transparent);
+  width: 380px;
+  height: 480px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+  /* Light, premium shadow */
+  border: 4px solid var(--bg-tertiary);
+  /* Solid white border like a picture frame */
+  background: var(--bg-tertiary);
+}
+
+.graphicOriginal {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1620663784119-0f089defc036?q=80&w=800&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.8;
+  filter: brightness(1.1);
+}
+
+.graphicVector {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1620663784119-0f089defc036?q=80&w=800&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  /* Simulating a gold vector extract effect */
+  filter: sepia(100%) hue-rotate(350deg) saturate(400%) contrast(120%);
+  clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+  animation: lightScan 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.graphicScanner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent-gold);
+  box-shadow: 0 0 20px var(--accent-gold), 0 0 50px rgba(229, 169, 61, 0.6);
+  animation: lineSweep 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes lightScan {
+
+  0%,
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 0%, 0 0%);
+  }
+
+  50% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+@keyframes lineSweep {
+
+  0%,
+  100% {
+    top: 0%;
+    opacity: 0;
+  }
+
+  10%,
+  90% {
+    opacity: 1;
+  }
+
+  50% {
+    top: 100%;
+    opacity: 1;
+  }
+}
+
+/* ============================
+   Scroll Section (画卷 Layout)
+============================ */
+.scrollSection {
+  padding: 8rem 0;
+  background-color: transparent;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
 }
 
 .sectionHeader {
   text-align: center;
   margin-bottom: var(--spacing-3xl);
+  position: relative;
+  z-index: 2;
 }
 
-.sectionTitle {
+.sectionHeader h2 {
   font-size: 2.5rem;
-  margin-bottom: var(--spacing-sm);
   color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+  letter-spacing: 0.1em;
 }
 
-.sectionSubtitle {
+.sectionHeader p {
   color: var(--text-secondary);
   font-size: 1.1rem;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: var(--spacing-xl);
-  padding: 0 var(--spacing-md);
-  max-width: 1200px;
-  margin: 0 auto;
+/* Central Silk Thread - Hidden on Mobile */
+.silkThread {
+  display: none;
 }
 
-.card {
-  padding: var(--spacing-xl);
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
-  position: relative;
-  overflow: hidden;
-  height: 100%;
+@media (min-width: 1024px) {
+  .silkThread {
+    display: block;
+    position: absolute;
+    top: 15%;
+    bottom: 5%;
+    left: 50%;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--glass-border), transparent);
+    z-index: 1;
+  }
+}
+
+.scrollLayout {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  gap: var(--spacing-3xl);
+  padding: 0 var(--spacing-md);
+  position: relative;
+  z-index: 2;
 }
 
-.card::before {
+/* Individual Scroll Items */
+.scrollItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .scrollItem {
+    flex-direction: row;
+    gap: 8rem;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Offset margins to create "breathing" space like a scroll */
+  .scrollItemLeft {
+    padding-right: 5%;
+  }
+
+  .scrollItemRight {
+    padding-left: 5%;
+  }
+}
+
+/* Text and Graphic Containers */
+.scrollText {
+  flex: 1;
+  max-width: 500px;
+}
+
+.scrollText h3 {
+  font-size: 2rem;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-primary);
+  /* Accent mark above heading to simulate Chinese stamp or accent */
+  position: relative;
+}
+
+.scrollText h3::before {
   content: '';
   position: absolute;
-  top: 0;
+  top: -15px;
   left: 0;
-  width: 4px;
-  height: 0%;
-  background: var(--accent-gold);
-  transition: height 0.4s ease;
+  width: 30px;
+  height: 3px;
+  background: var(--accent-red);
 }
 
-.card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-}
-
-.card:hover::before {
-  height: 100%;
-}
-
-.cardIcon {
-  font-size: 2.5rem;
-  margin-bottom: var(--spacing-md);
-  color: var(--accent-gold);
-}
-
-.cardTitle {
-  font-size: 1.5rem;
-  margin-bottom: var(--spacing-sm);
-  color: var(--text-primary);
-}
-
-.cardDesc {
+.scrollText p {
   color: var(--text-secondary);
-  line-height: 1.6;
+  font-size: 1.1rem;
+  line-height: 1.8;
 }
 
-/* Pain Points vs Solutions Comparison */
-.comparison {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-xl);
-  justify-content: center;
-  align-items: stretch;
-  margin-top: var(--spacing-2xl);
-}
-
-.comBox {
+.scrollGraphic {
   flex: 1;
-  min-width: 300px;
-  max-width: 450px;
-  padding: var(--spacing-xl);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--glass-border);
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  justify-content: center;
 }
 
-.painPoint {
-  background: linear-gradient(145deg, rgba(20, 22, 26, 0.8), rgba(139, 28, 28, 0.05));
-  border-top: 3px solid var(--error);
+/* Giant Faint Typography Number underneath the card */
+.watermarkNumber {
+  position: absolute;
+  top: -40px;
+  left: -20px;
+  font-size: 10rem;
+  font-weight: 800;
+  font-family: var(--font-serif);
+  color: rgba(229, 169, 61, 0.1);
+  line-height: 1;
+  z-index: 0;
+  user-select: none;
+  pointer-events: none;
 }
 
-.solution {
-  background: linear-gradient(145deg, rgba(20, 22, 26, 0.8), rgba(212, 175, 55, 0.05));
-  border-top: 3px solid var(--success);
+@media (min-width: 1024px) {
+  .scrollItemRight .watermarkNumber {
+    left: auto;
+    right: -20px;
+  }
 }
 
-.comTitle {
-  font-family: var(--font-sans);
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: var(--spacing-md);
+.graphicCard {
+  width: 100%;
+  aspect-ratio: 4/3;
+  z-index: 2;
+  position: relative;
+  overflow: hidden;
+}
+
+.graphicPlaceholder {
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%);
 }
 
-.comList {
-  list-style: none;
+.iconCircleLg {
+  font-size: 4rem;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.05));
 }
 
-.comList li {
-  margin-bottom: var(--spacing-sm);
-  color: var(--text-secondary);
+/* Reusing visual rays */
+.visualRays {
   display: flex;
-  align-items: flex-start;
-  gap: var(--spacing-sm);
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
 }
 
-.comList li::before {
-  content: "•";
-  color: inherit;
+.ray {
+  height: 6px;
+  background: var(--accent-gold);
+  border-radius: var(--radius-full);
 }
 
-.painPoint .comList li::before {
-  color: var(--error);
+.ray:nth-child(1) {
+  width: 60px;
 }
 
-.solution .comList li::before {
-  color: var(--success);
+.ray:nth-child(2) {
+  width: 120px;
+  background: var(--accent-red);
 }
 
-@media (max-width: 768px) {
-  .heroTitle {
-    font-size: 3rem;
-  }
-
-  .ctaGroup {
-    flex-direction: column;
-    width: 100%;
-    max-width: 300px;
-  }
+.ray:nth-child(3) {
+  width: 40px;
+  background: var(--accent-green);
+  opacity: 0.6;
 }
